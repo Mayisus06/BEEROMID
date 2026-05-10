@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "BEEROMID",
+    "slug": "beeromid",
+    "scheme": "beeromid",
+    "icon": "./assets/logo/BEEROMID.png",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/logo/BEEROMID.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#080A26"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo/BEEROMID.png",
+        "backgroundColor": "#080A26"
+      }
+    },
+    "web": {
+      "favicon": "./assets/logo/BEEROMID.png"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "juego-de-la-piramide-celu-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix mobile",
+    "dev": "node scripts/dev.cjs",
+    "dev:tunnel": "node scripts/dev.cjs --tunnel"
+  }
+}
