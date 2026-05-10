@@ -16,7 +16,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/BEEROMID.png",
         "backgroundColor": "#080A26"
-      }
+      },
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/logo/BEEROMID.png"
