@@ -12,6 +12,7 @@
       "backgroundColor": "#080A26"
     },
     "android": {
+      "package": "com.mayisus.beeromid",
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo/BEEROMID.png",
         "backgroundColor": "#080A26"
@@ -20,9 +21,18 @@
     "web": {
       "favicon": "./assets/logo/BEEROMID.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4e15c000-6849-4817-aa19-ee60a15292ff"
+      }
+    },
+    "owner": "mayisus6"
   }
 }

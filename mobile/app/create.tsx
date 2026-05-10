@@ -16,7 +16,11 @@ import {
 } from 'react-native';
 import { theme } from '../constants/theme';
 import { createRoom } from '../services/api';
-import { BACKEND_URL } from '../services/backendUrl';
+import {
+  BACKEND_URL,
+  BACKEND_URL_IS_UNCONFIGURED,
+  getBackendConfigHelpMessage,
+} from '../services/backendUrl';
 import { connectSocket } from '../services/socket';
 import { useGameStore } from '../store/gameStore';
 
@@ -43,6 +47,10 @@ export default function CreateScreen(): React.ReactElement {
   const onCreate = async (): Promise<void> => {
     if (!name.trim()) {
       Alert.alert('Falta tu nombre', 'Escribi como te llamas para crear la sala.');
+      return;
+    }
+    if (BACKEND_URL_IS_UNCONFIGURED) {
+      Alert.alert('Backend no configurado', getBackendConfigHelpMessage());
       return;
     }
 
@@ -83,7 +91,9 @@ export default function CreateScreen(): React.ReactElement {
           serverMessage ||
           (error.response
             ? 'El backend rechazo la solicitud.'
-            : `No se pudo conectar al backend en ${BACKEND_URL}.`);
+            : BACKEND_URL_IS_UNCONFIGURED
+              ? getBackendConfigHelpMessage()
+              : `No se pudo conectar al backend en ${BACKEND_URL}.`);
         Alert.alert('No se pudo crear la sala', message);
       } else {
         Alert.alert('No se pudo crear la sala', 'Ocurrio un error inesperado.');

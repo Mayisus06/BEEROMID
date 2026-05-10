@@ -50,6 +50,33 @@ Si usas Android emulator, usa:
 set EXPO_PUBLIC_API_URL=http://10.0.2.2:3001
 ```
 
+### Build release (EAS)
+
+En produccion, la app **no** usa fallback a `localhost`.
+Debes configurar `EXPO_PUBLIC_API_URL` con la URL publica **HTTPS** de tu backend antes de compilar.
+
+Ejemplo de variable para produccion:
+
+```bash
+EXPO_PUBLIC_API_URL=https://tu-backend-publico.com
+```
+
+Puedes cargarla en EAS (entorno `production`) con:
+
+```bash
+cd mobile
+eas env:create --environment production --name EXPO_PUBLIC_API_URL --value https://tu-backend-publico.com
+```
+
+Luego compila:
+
+```bash
+cd mobile
+npm run build:android:aab
+```
+
+Si no configuras esa variable (o usas `http://` en release), la app mostrara `Backend no configurado` al crear/unirse a una sala.
+
 ## Todo junto (un comando)
 
 Desde la raiz del proyecto:

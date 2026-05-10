@@ -14,7 +14,11 @@ import {
 } from 'react-native';
 import { theme } from '../constants/theme';
 import { joinRoom } from '../services/api';
-import { BACKEND_URL } from '../services/backendUrl';
+import {
+  BACKEND_URL,
+  BACKEND_URL_IS_UNCONFIGURED,
+  getBackendConfigHelpMessage,
+} from '../services/backendUrl';
 import { connectSocket } from '../services/socket';
 import { useGameStore } from '../store/gameStore';
 
@@ -32,6 +36,10 @@ export default function JoinScreen(): React.ReactElement {
     const roomCode = code.trim().toUpperCase();
     if (!name.trim() || roomCode.length !== 4) {
       Alert.alert('Datos incompletos', 'Ingresa tu nombre y un codigo de 4 caracteres.');
+      return;
+    }
+    if (BACKEND_URL_IS_UNCONFIGURED) {
+      Alert.alert('Backend no configurado', getBackendConfigHelpMessage());
       return;
     }
 
@@ -67,7 +75,9 @@ export default function JoinScreen(): React.ReactElement {
           serverMessage ||
           (error.response
             ? 'Revisa el codigo o que la sala exista.'
-            : `No se pudo conectar al backend en ${BACKEND_URL}.`);
+            : BACKEND_URL_IS_UNCONFIGURED
+              ? getBackendConfigHelpMessage()
+              : `No se pudo conectar al backend en ${BACKEND_URL}.`);
         Alert.alert('No se pudo unir', message);
       } else {
         Alert.alert('No se pudo unir', 'Ocurrio un error inesperado.');

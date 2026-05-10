@@ -108,11 +108,12 @@ export default function GameScreen(): React.ReactElement {
   }, [roomCode, myPlayer, hydrateRoom, applyFlip, setMyHand, setStats, router]);
 
   const canHostControl = isHost && roomStatus === 'IN_PROGRESS' && Boolean(myPlayer);
+  const pendingMatchesCount = pendingAction?.matchingPlayerIds.length ?? 0;
   const canReplace =
     canHostControl &&
     Boolean(currentCard) &&
     Boolean(pendingAction) &&
-    pendingAction.matchingPlayerIds.length === 0;
+    pendingMatchesCount === 0;
 
   const emitFlip = (): void => {
     if (!canHostControl || !myPlayer) {
